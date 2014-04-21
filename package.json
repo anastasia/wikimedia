@@ -1,0 +1,16 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.4.8",
+    "jade": "*",
+    "json-middleware": "~1.0.2",
+    "express-method-override": "0.0.3",
+    "angular": "~1.2.15",
+    "jquery": "~2.1.0"
+  }
+}
