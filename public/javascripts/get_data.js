@@ -39,6 +39,7 @@ var populateTopics = function ( topics ) {
 
 
 var showResponses = function ( id, topics ) {
+  // BUG: appends same responses every time topic is clicked. Ran out of time to fix!
   id = parseInt(id);
   for ( var i = 0; i < topics.length; i++ ) {
     id !== i ?  $('#'+i).css('display', 'none') : $('#'+i).css('display', 'inline-block')
@@ -46,15 +47,17 @@ var showResponses = function ( id, topics ) {
 
   if ( topics[id].responses.length ) {
     for ( var j = 0; j < topics[id].responses.length; j++ ) {
+      var age = calculateLastDate(topics[id].responses[j].age);
       $('.discussion').append('<div class="response">'
                               +'<li id='
                               +id+'_'+j+'>' 
                               +'<span class="author">'
                               +topics[id].responses[j].author
                               +'</span>' + ': ' 
-                              +topics[id].responses[j].posttext 
+                              +topics[id].responses[j].posttext
+                              +'<li class="last_response">'+age+'</li>'
                               + '</li><button>reply'
-                              +'</button> </div>');
+                              +'</button></div>');
     }
   }
   replyToResponse();
@@ -84,7 +87,7 @@ var topicOnClick = function () {
 }
 
 var replyToResponse = function () {
-  $('button').on('click', function () {
+  $('button').on('click', function () { 
     var responseId = $(this).parent().children(":first").attr('id');
     $('#'+responseId).append('<fieldset class="replySet">'
                             +'<input type=text placeholder="write your response here">'
